@@ -1,13 +1,14 @@
+"use client";
 import React from "react";
 
 import Image from "next/image";
 import ChatInput from "../ChatInput";
 
-interface ChatMessagesProps {
-  handleSendMessage: (message: string) => void;
-}
+const ChatMessages: React.FC = () => {
+  const handleSendMessage = (message: string) => {
+    console.log(message);
+  };
 
-const ChatMessages: React.FC<ChatMessagesProps> = ({ handleSendMessage }) => {
   return (
     <div className="flex flex-1 flex-col rounded-[28px] bg-white">
       <div className="flex items-center gap-3 justify-start border-b border-gray-200 py-2 px-5">
