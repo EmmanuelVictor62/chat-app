@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -23,20 +24,16 @@ const ChatInput: React.FC<ChatInputProps> = ({ handleSendMessage }) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex items-center gap-2 bg-[#f5f5fa] border border-[#ccc] rounded-full px-4 py-2"
-      style={{ boxShadow: "0px 2px 5px rgba(23, 26, 31, 0.1)" }}
+      className="flex items-center justify-between gap-2 bg-color-light-blue-1  rounded-full px-5 py-4"
     >
       <input
         {...register("message")}
         type="text"
-        placeholder="Type a message..."
+        placeholder="Reply to Chatbot..."
         className="flex-1 bg-transparent border-none outline-none text-sm text-[#171a1f]"
       />
 
-      <button
-        type="submit"
-        className="text-[#171a1f] hover:text-[#65558f] transition-all"
-      >
+      <button type="submit">
         <Icon icon="paperPlane" />
       </button>
     </form>

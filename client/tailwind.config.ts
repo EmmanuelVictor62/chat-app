@@ -10,6 +10,9 @@ export default {
     extend: {
       colors: {
         "purple-1": "#EADDFF",
+        "color-dark-1": "#1D1B20",
+        "color-dark-2": "#49454F",
+        "color-light-blue-1": "#ECE6F0",
       },
       boxShadow: {
         "custom-1": "0px 2px 5px 0px #171A1F17",
