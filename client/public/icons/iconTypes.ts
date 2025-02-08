@@ -1,1 +1,1 @@
-export type IconNames = "plusIcon" | "bin";
+export type IconNames = "plusIcon" | "bin" | "paperPlane";

@@ -8,7 +8,9 @@ export default function Home() {
           CHATBOT
         </div>
       </div>
-      <Sidebar />
+      <div className="grid grid-cols-[300px_1fr] gap-6 p-8 bg-[#FEF7FF] h-full flex-1">
+        <Sidebar />
+      </div>
     </div>
   );
 }
