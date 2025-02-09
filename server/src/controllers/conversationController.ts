@@ -21,7 +21,7 @@ export const deleteConversation = async (req: Request, res: Response) => {
     });
 
     res.json(conversations);
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({ message: error?.message });
   }
 };
@@ -35,7 +35,7 @@ export const createMessage = async (req: Request, res: Response) => {
     });
 
     res.json(message);
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({ message: error?.message });
   }
 };
