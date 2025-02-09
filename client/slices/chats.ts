@@ -5,12 +5,14 @@ interface ChatStateProps {
   loading: boolean;
   error: boolean;
   conversations: Conversation[];
+  selectedConversation: Conversation;
 }
 
 const initialState: ChatStateProps = {
   loading: false,
   error: false,
   conversations: [],
+  selectedConversation: null!,
 };
 
 const chatSlice = createSlice({
@@ -39,6 +41,11 @@ const chatSlice = createSlice({
         messages: [],
       };
       state.conversations.push(newConversation);
+    },
+    getConversation: (state, { payload }: PayloadAction<string>) => {
+      state.selectedConversation = state.conversations.find(
+        (conversation) => conversation.id === payload!
+      )!;
     },
     deleteConversation: (state, { payload }: PayloadAction<string>) => {
       const filteredConversations = state.conversations?.filter(
@@ -72,6 +79,7 @@ export const {
   apiCallFailed,
   listAllConversations,
   createConversation,
+  getConversation,
   deleteConversation,
   addMessageToConversation,
 } = chatSlice.actions;

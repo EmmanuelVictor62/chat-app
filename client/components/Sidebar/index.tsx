@@ -1,12 +1,19 @@
 "use client";
 import React from "react";
+import { Dispatch } from "redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Icon from "../Icon";
-import { useSelector } from "react-redux";
 import { chatSlice } from "@/state_manager/selectors";
+import { getConversation } from "@/slices/chats";
 
 const Sidebar: React.FC = () => {
-  const { conversations } = useSelector(chatSlice);
+  const dispatch = useDispatch<Dispatch<any>>();
+  const { conversations, selectedConversation } = useSelector(chatSlice);
+
+  const handleGetConversation = (conversationId: string) => {
+    dispatch(getConversation(conversationId));
+  };
 
   return (
     <div className="flex flex-col gap-4 overflow-hidden h-full">
@@ -16,10 +23,15 @@ const Sidebar: React.FC = () => {
       </button>
       <div className="flex flex-col gap-4 overflow-auto flex-1">
         {conversations?.map((conversation, index) => {
+          const isSelected = conversation?.id === selectedConversation?.id;
+
           return (
             <div
               key={index + 1}
-              className="flex items-center justify-between py-3 px-4 rounded-2xl bg-[rgba(29,27,32,0.12)] text-[#1D1B20] text-sm hover:bg-purple-1 transition"
+              onClick={() => handleGetConversation(conversation?.id)}
+              className={`flex items-center justify-between py-3 px-4 rounded-2xl  text-[#1D1B20] text-sm hover:bg-purple-1 transition ${
+                isSelected ? "bg-purple-1" : "bg-[rgba(29,27,32,0.12)]"
+              }`}
             >
               Conversation {index + 1}
               <button>

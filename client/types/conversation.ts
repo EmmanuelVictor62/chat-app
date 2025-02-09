@@ -9,6 +9,7 @@ export type Message = {
   conversationId: string;
   text: string;
   createdAt?: Date;
+  sender?: MessageSenderEnum;
 };
 
 export enum MessageSenderEnum {
