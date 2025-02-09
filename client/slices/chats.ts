@@ -1,4 +1,9 @@
-import { Conversation, CreateMessageInput } from "@/types/conversation";
+import {
+  Conversation,
+  CreateMessageInput,
+  MessageSenderEnum,
+} from "@/types/conversation";
+import { getRandomConversationId } from "@/utils/helpers";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface ChatStateProps {
@@ -38,9 +43,21 @@ const chatSlice = createSlice({
     createConversation: (state, { payload }: PayloadAction<string>) => {
       const newConversation: Conversation = {
         id: payload,
-        messages: [],
+        createdAt: new Date().toISOString(),
+        messages: [
+          {
+            sender: MessageSenderEnum.BOT,
+            text: "Hi, how can I help you?",
+            conversationId: payload,
+          },
+        ],
       };
+
       state.conversations.push(newConversation);
+      state.selectedConversation = newConversation;
+
+      state.loading = false;
+      state.error = false;
     },
     getConversation: (state, { payload }: PayloadAction<string>) => {
       state.selectedConversation = state.conversations.find(

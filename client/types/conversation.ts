@@ -1,20 +1,20 @@
 export type Conversation = {
   id: string;
   messages: Message[];
-  createdAt?: Date;
+  createdAt?: string;
 };
 
 export type Message = {
   id?: string;
   conversationId: string;
   text: string;
-  createdAt?: Date;
+  createdAt?: string;
   sender?: MessageSenderEnum;
 };
 
 export enum MessageSenderEnum {
-  BOT = "bot",
-  USER = "user",
+  BOT = "BOT",
+  USER = "USER",
 }
 
 export type CreateMessageInput = {

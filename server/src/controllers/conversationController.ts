@@ -16,8 +16,29 @@ export const listAllConversations = async (req: Request, res: Response) => {
 
 export const createConversation = async (req: Request, res: Response) => {
   try {
+    const { message } = req.body;
+
+    const data = [
+      {
+        sender: "BOT",
+        text: "Hi, how can I help you?",
+      },
+      {
+        sender: "USER",
+        text: message,
+      },
+      {
+        sender: "BOT",
+        text: "This is an AI generated message",
+      },
+    ];
+
     const conversation = await prisma.conversation.create({
-      data: { id: `CON-${uuidv4()}` },
+      data: {
+        id: `CON-${uuidv4()}`,
+        messages: { create: data },
+      },
+      include: { messages: true },
     });
 
     res.status(200).json(conversation);

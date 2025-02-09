@@ -25,7 +25,7 @@ export default function ConversationProvider({
       }
     };
     handleFetchConversations();
-  }, [dispatch, conversations]);
+  }, []);
 
   return <>{children}</>;
 }

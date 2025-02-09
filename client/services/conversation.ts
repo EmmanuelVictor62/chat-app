@@ -17,6 +17,20 @@ export const listAllConversationsService = async () => {
   }
 };
 
+export const createConversationService = async (message: string) => {
+  try {
+    const url = `${process.env.NEXT_PUBLIC_CHAT_API_URL}/api/conversations`;
+
+    const { data } = (await axios.post(url, { params: message })) as {
+      data: Conversation;
+    };
+
+    return { data };
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const deleteConversationService = async (id: string) => {
   try {
     const url = `${process.env.NEXT_PUBLIC_CHAT_API_URL}/api/conversations`;

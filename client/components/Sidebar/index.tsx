@@ -5,9 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Icon from "../Icon";
 import { chatSlice } from "@/state_manager/selectors";
-import { getConversation } from "@/slices/chats";
+import { createConversation, getConversation } from "@/slices/chats";
+import { getRandomConversationId } from "@/utils/helpers";
 
 const Sidebar: React.FC = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dispatch = useDispatch<Dispatch<any>>();
   const { conversations, selectedConversation } = useSelector(chatSlice);
 
@@ -15,9 +17,17 @@ const Sidebar: React.FC = () => {
     dispatch(getConversation(conversationId));
   };
 
+  const handleAddConversation = () => {
+    const conversationId = getRandomConversationId();
+    dispatch(createConversation(conversationId));
+  };
+
   return (
     <div className="flex flex-col gap-4 overflow-hidden h-full">
-      <button className="flex items-center justify-center gap-3  bg-purple-1 rounded-2xl bg-c shadow-custom-3 py-4 px-5 text-sm text-[#21005D]">
+      <button
+        className="flex items-center justify-center gap-3  bg-purple-1 rounded-2xl bg-c shadow-custom-3 py-4 px-5 text-sm text-[#21005D]"
+        onClick={handleAddConversation}
+      >
         <Icon icon="plusIcon" />
         Conversations
       </button>

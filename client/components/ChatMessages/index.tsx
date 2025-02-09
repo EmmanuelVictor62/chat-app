@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useSelector } from "react-redux";
 
 import ChatInput from "../ChatInput";
+
 import { chatSlice } from "@/state_manager/selectors";
 import { formattedDateTime } from "@/utils/helpers";
 import { MessageSenderEnum } from "@/types/conversation";
@@ -24,13 +25,13 @@ const ChatMessages: React.FC = () => {
 
       <div className="flex flex-1 flex-col gap-3 pt-5 pb-3 px-5 overflow-auto h-full">
         <p className="self-center text-sm text-color-dark-1">
-          {formattedDateTime(selectedConversation.createdAt!)}
+          {formattedDateTime(selectedConversation?.createdAt) ?? "N/A"}
         </p>
 
-        {selectedConversation?.messages?.map((message) => {
+        {selectedConversation?.messages?.map((message, index) => {
           return (
-            <React.Fragment key={message?.id}>
-              {message?.sender === MessageSenderEnum.BOT ? (
+            <React.Fragment key={index + 1}>
+              {message?.sender?.toUpperCase() === MessageSenderEnum.BOT ? (
                 <div
                   className={`flex items-center gap-2  py-[10px] justify-start`}
                 >
