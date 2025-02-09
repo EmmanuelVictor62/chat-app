@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
 import prisma from "../config/db";
 
-export const listAllConversations = async (res: Response) => {
+export const listAllConversations = async (req: Request, res: Response) => {
   try {
     const conversations = await prisma.conversation.findMany({
       include: { messages: true },
     });
-    res.json(conversations);
+
+    res.status(200).json(conversations);
   } catch (error: any) {
     res.status(500).json({ message: error?.message });
   }
@@ -20,7 +21,7 @@ export const deleteConversation = async (req: Request, res: Response) => {
       where: { id: id },
     });
 
-    res.json(conversations);
+    res.status(200).json(conversations);
   } catch (error: any) {
     res.status(500).json({ message: error?.message });
   }
@@ -34,7 +35,7 @@ export const createMessage = async (req: Request, res: Response) => {
       data: { text, sender, conversationId },
     });
 
-    res.json(message);
+    res.status(200).json(message);
   } catch (error: any) {
     res.status(500).json({ message: error?.message });
   }
