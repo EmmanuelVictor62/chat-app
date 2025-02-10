@@ -18,6 +18,7 @@ The chatbot mimics a typical chatbot interaction but currently sends a hardcoded
 ## 📁 Project Structure
 ```
 
+```
 chat-app/
 │── client/ # Next.js frontend
 │ ├── components/ # Reusable UI components
@@ -44,15 +45,16 @@ chat-app/
 │── package.json # Project dependencies
 │── tsconfig.json # TypeScript configuration
 
-````
+```
 
 ## 🔧 Setup and Installation
 
 ### 1️⃣ Clone the repository
+
 ```sh
 git clone https://github.com/EmmanuelVictor62/chat-app.git
 cd chat-app
-````
+```
 
 ### 2️⃣ Set up environment variables
 
@@ -61,6 +63,8 @@ Create a `.env` file in the `server/` directory and add:
 ```sh
 DATABASE_URL="postgresql://user:password@localhost:5334/chat_db?schema=public"
 ```
+
+You should include your postgres username and password
 
 ### 3️⃣ Install dependencies
 
@@ -114,7 +118,3 @@ All API requests are validated using Zod. If the request does not meet the schem
 ---
 
 **Made with ❤️ by Emmanuel Victor**
-
-```
-
-```
