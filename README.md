@@ -1,9 +1,9 @@
-# chat-app
+Here's the properly ordered and formatted `README.md`:
 
 ```md
 # Chat Application
 
-A real-time chat application built with Next.js, Express.js, Prisma, and PostgreSQL. This project includes features such as chatbot interactions, and API validation using Zod.
+A real-time chat application built with Next.js, Express.js, Prisma, and PostgreSQL. This project includes features such as chatbot interactions and API validation using Zod.
 
 The chatbot mimics a typical chatbot interaction but currently sends a hardcoded response for testing purposes instead of generating dynamic replies.
 
@@ -21,13 +21,13 @@ The chatbot mimics a typical chatbot interaction but currently sends a hardcoded
 chat-app/
 │── client/ # Next.js frontend
 │ ├── components/ # Reusable UI components
-| |-- hooks /# Reusable Hook functions
+│ ├── hooks/ # Reusable Hook functions
 │ ├── pages/ # Application pages
 │ ├── store/ # Redux store setup
-| |-- slices/# Redux toolkit slices
-| |-- services/# Api call functionality
+│ │ ├── slices/ # Redux toolkit slices
+│ │ ├── services/ # API call functionality
 │ ├── styles/ # Global styles
-│ └── utils/ # Utility functions
+│ ├── utils/ # Utility functions
 │
 │── server/ # Express.js backend
 │ ├── config/ # Database and environment configurations
@@ -37,7 +37,7 @@ chat-app/
 │ ├── schemas/ # Zod validation schemas
 │ ├── services/ # Business logic
 │ ├── swagger/ # API documentation
-│ └── prisma/ # Prisma schema and migrations
+│ ├── prisma/ # Prisma schema and migrations
 │
 │── .env # Environment variables
 │── README.md # Project documentation
@@ -113,7 +113,7 @@ All API requests are validated using Zod. If the request does not meet the schem
 
 ---
 
-**Made with ❤️ by Emmanuel Victor. **
+**Made with ❤️ by Emmanuel Victor**
 
 ```
 
