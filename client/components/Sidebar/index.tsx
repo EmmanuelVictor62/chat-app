@@ -4,15 +4,17 @@ import { Dispatch } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 
 import Icon from "../Icon";
-import { chatSlice } from "@/state_manager/selectors";
-import { createConversation, getConversation } from "@/slices/chats";
-import { getRandomConversationId } from "@/utils/helpers";
 import { useConversation } from "@/src/app/Providers/conversationProvider";
+
+import { chatSlice } from "@/state_manager/selectors";
+import { getRandomConversationId } from "@/utils/helpers";
+import { createConversation, getConversation } from "@/slices/chats";
 
 const Sidebar: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dispatch = useDispatch<Dispatch<any>>();
-  const { conversations, selectedConversation } = useSelector(chatSlice);
+  const { conversations, selectedConversation, isLoadingConversations } =
+    useSelector(chatSlice);
   const { handleOpenDeleteModal } = useConversation();
 
   const handleGetConversation = (conversationId: string) => {
@@ -33,33 +35,39 @@ const Sidebar: React.FC = () => {
         <Icon icon="plusIcon" />
         Conversations
       </button>
-      <div className="flex flex-col gap-4 overflow-auto flex-1">
-        {conversations?.map((conversation, index) => {
-          const isSelected = conversation?.id === selectedConversation?.id;
+      {!isLoadingConversations ? (
+        <div className="flex flex-col gap-4 overflow-auto flex-1">
+          {conversations?.map((conversation, index) => {
+            const isSelected = conversation?.id === selectedConversation?.id;
 
-          return (
-            <div
-              key={index + 1}
-              onClick={() => handleGetConversation(conversation?.id)}
-              className={`flex items-center justify-between py-3 px-4 rounded-2xl  text-[#1D1B20] text-sm hover:bg-purple-1 transition ${
-                isSelected ? "bg-purple-1" : "bg-[rgba(29,27,32,0.12)]"
-              }`}
-            >
-              Conversation {index + 1}
-              <button
-                onClick={() =>
-                  handleOpenDeleteModal(
-                    `Conversation ${index + 1}`,
-                    conversation?.id
-                  )
-                }
+            return (
+              <div
+                key={index + 1}
+                onClick={() => handleGetConversation(conversation?.id)}
+                className={`flex items-center justify-between py-3 px-4 rounded-2xl  text-[#1D1B20] text-sm hover:bg-purple-1 transition ${
+                  isSelected ? "bg-purple-1" : "bg-[rgba(29,27,32,0.12)]"
+                }`}
               >
-                <Icon icon="bin" />
-              </button>
-            </div>
-          );
-        })}
-      </div>
+                Conversation {index + 1}
+                <button
+                  onClick={() =>
+                    handleOpenDeleteModal(
+                      `Conversation ${index + 1}`,
+                      conversation?.id
+                    )
+                  }
+                >
+                  <Icon icon="bin" />
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="flex items-center justify-center h-full">
+          <Icon icon="loading" />
+        </div>
+      )}
     </div>
   );
 };

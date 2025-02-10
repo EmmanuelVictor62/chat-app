@@ -8,6 +8,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface ChatStateProps {
   loading: boolean;
   error: boolean;
+  isLoadingConversations: boolean;
   conversations: Conversation[];
   selectedConversation: Conversation;
 }
@@ -15,6 +16,7 @@ interface ChatStateProps {
 const initialState: ChatStateProps = {
   loading: false,
   error: false,
+  isLoadingConversations: false,
   conversations: [],
   selectedConversation: null!,
 };
@@ -25,6 +27,7 @@ const chatSlice = createSlice({
   reducers: {
     initialApiCall: (state) => {
       state.loading = true;
+      state.isLoadingConversations = true;
       state.error = false;
     },
     apiCallFailed: (state) => {
@@ -36,6 +39,7 @@ const chatSlice = createSlice({
       { payload }: PayloadAction<Conversation[]>
     ) => {
       state.conversations = payload;
+      state.isLoadingConversations = false;
       state.loading = false;
       state.error = false;
     },
