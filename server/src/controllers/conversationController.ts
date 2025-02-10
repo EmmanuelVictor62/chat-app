@@ -52,10 +52,10 @@ export const createConversation = async (req: Request, res: Response) => {
 
 export const deleteConversation = async (req: Request, res: Response) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
 
     const conversations = await prisma.conversation.delete({
-      where: { id: id },
+      where: { id },
     });
 
     res.status(200).json(conversations);

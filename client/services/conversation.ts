@@ -33,14 +33,15 @@ export const createConversationService = async (message: string) => {
 
 export const deleteConversationService = async (id: string) => {
   try {
-    const url = `${process.env.NEXT_PUBLIC_CHAT_API_URL}/api/conversations`;
+    const url = `${process.env.NEXT_PUBLIC_CHAT_API_URL}/api/conversations/${id}`;
 
-    const { data } = (await axios.delete(url, {
-      params: id,
-    })) as { data: Conversation };
+    const { data } = (await axios.delete(url)) as {
+      data: Conversation;
+    };
 
     return { data };
   } catch (error) {
+    console.error(error, "service failed");
     throw error;
   }
 };

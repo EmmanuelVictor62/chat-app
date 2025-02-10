@@ -13,6 +13,9 @@ export default {
         "color-dark-1": "#1D1B20",
         "color-dark-2": "#49454F",
         "color-light-blue-1": "#ECE6F0",
+        "color-light-blue-2": "#E8DEF8",
+        "color-red-1": "#B3261E",
+        "modal-background": "rgba(24, 19, 43, 0.21)",
       },
       boxShadow: {
         "custom-1": "0px 2px 5px 0px #171A1F17",

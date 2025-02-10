@@ -13,4 +13,115 @@ export const icons: Record<IconNames, string> = {
 <path d="M0 16V0L19 8L0 16ZM2 13L13.85 8L2 3V6.5L8 8L2 9.5V13ZM2 13V8V3V6.5V9.5V13Z" fill="#49454F"/>
 </svg>
 `,
+  loading: `<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 50 50"
+  width="50"
+  height="50"
+>
+  <circle
+    cx="25"
+    cy="25"
+    r="20"
+    fill="none"
+    stroke="#E1D8F1"
+    stroke-width="5"
+  />
+  <circle
+    cx="25"
+    cy="25"
+    r="20"
+    fill="none"
+    stroke="#65558F"
+    stroke-width="5"
+    stroke-linecap="round"
+    stroke-dasharray="31.4 188.4"
+    transform="rotate(-90 25 25)"
+  >
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      from="0 25 25"
+      to="360 25 25"
+      dur="1s"
+      repeatCount="indefinite"
+    />
+  </circle>
+</svg>
+`,
+  typing: `<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 120 30"
+  fill="#b0c4d7"
+  width="120"
+  height="30"
+>
+  <circle cx="15" cy="15" r="12">
+    <animate
+      attributeName="r"
+      from="12"
+      to="12"
+      begin="0s"
+      dur="0.8s"
+      values="12; 9; 12"
+      calcMode="linear"
+      repeatCount="indefinite"
+    />
+    <animate
+      attributeName="fill-opacity"
+      from="1"
+      to="1"
+      begin="0s"
+      dur="0.8s"
+      values="1; .5; 1"
+      calcMode="linear"
+      repeatCount="indefinite"
+    />
+  </circle>
+  <circle cx="60" cy="15" r="9" fill-opacity="0.3">
+    <animate
+      attributeName="r"
+      from="9"
+      to="9"
+      begin="0.2s"
+      dur="0.8s"
+      values="9; 6; 9"
+      calcMode="linear"
+      repeatCount="indefinite"
+    />
+    <animate
+      attributeName="fill-opacity"
+      from="0.5"
+      to="0.5"
+      begin="0.2s"
+      dur="0.8s"
+      values="0.5; 0.2; 0.5"
+      calcMode="linear"
+      repeatCount="indefinite"
+    />
+  </circle>
+  <circle cx="105" cy="15" r="9" fill-opacity="0.3">
+    <animate
+      attributeName="r"
+      from="9"
+      to="9"
+      begin="0.4s"
+      dur="0.8s"
+      values="9; 6; 9"
+      calcMode="linear"
+      repeatCount="indefinite"
+    />
+    <animate
+      attributeName="fill-opacity"
+      from="0.5"
+      to="0.5"
+      begin="0.4s"
+      dur="0.8s"
+      values="0.5; 0.2; 0.5"
+      calcMode="linear"
+      repeatCount="indefinite"
+    />
+  </circle>
+</svg>
+`,
 };

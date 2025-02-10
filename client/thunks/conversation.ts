@@ -26,14 +26,14 @@ export const listAllConversationsThunk = (): AppThunk => async (dispatch) => {
 };
 
 export const deleteConversationThunk =
-  (id: string): AppThunk =>
+  (conversationId: string): AppThunk =>
   async (dispatch) => {
     try {
       dispatch(initialApiCall());
 
-      await deleteConversationService(id);
+      await deleteConversationService(conversationId);
 
-      dispatch(deleteConversation(id));
+      dispatch(deleteConversation(conversationId));
     } catch {
       dispatch(apiCallFailed());
     }

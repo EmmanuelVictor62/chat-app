@@ -7,11 +7,13 @@ import Icon from "../Icon";
 import { chatSlice } from "@/state_manager/selectors";
 import { createConversation, getConversation } from "@/slices/chats";
 import { getRandomConversationId } from "@/utils/helpers";
+import { useConversation } from "@/src/app/Providers/conversationProvider";
 
 const Sidebar: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dispatch = useDispatch<Dispatch<any>>();
   const { conversations, selectedConversation } = useSelector(chatSlice);
+  const { handleOpenDeleteModal } = useConversation();
 
   const handleGetConversation = (conversationId: string) => {
     dispatch(getConversation(conversationId));
@@ -44,7 +46,14 @@ const Sidebar: React.FC = () => {
               }`}
             >
               Conversation {index + 1}
-              <button>
+              <button
+                onClick={() =>
+                  handleOpenDeleteModal(
+                    `Conversation ${index + 1}`,
+                    conversation?.id
+                  )
+                }
+              >
                 <Icon icon="bin" />
               </button>
             </div>

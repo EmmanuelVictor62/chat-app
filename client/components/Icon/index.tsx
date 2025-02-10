@@ -5,12 +5,13 @@ import { IconNames } from "@/public/icons/iconTypes";
 
 interface IconProps {
   icon: IconNames;
+  className?: string;
 }
-const Icon: React.FC<IconProps> = ({ icon }): React.ReactNode => {
+const Icon: React.FC<IconProps> = ({ icon, className }): React.ReactNode => {
   return (
     <span
       aria-hidden={true}
-      className={"icon"}
+      className={className}
       data-icon="true"
       dangerouslySetInnerHTML={{ __html: icons[icon] }}
     />

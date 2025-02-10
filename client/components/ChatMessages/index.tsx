@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import { Dispatch } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 
 import ChatInput from "../ChatInput";
@@ -9,7 +10,6 @@ import { chatSlice } from "@/state_manager/selectors";
 import { formattedDateTime } from "@/utils/helpers";
 import { CreateMessageInput, MessageSenderEnum } from "@/types/conversation";
 import { createMessageThunk } from "@/thunks/conversation";
-import { Dispatch } from "redux";
 import { addMessageToConversation } from "@/slices/chats";
 
 const ChatMessages: React.FC = () => {
