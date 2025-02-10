@@ -29,7 +29,7 @@ const Sidebar: React.FC = () => {
     try {
       const { data } = await createConversationService();
 
-      if (data) dispatch(createConversation(null!));
+      if (data) dispatch(createConversation(data?.id));
     } catch (error) {
       throw error;
     }

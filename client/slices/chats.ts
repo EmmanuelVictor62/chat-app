@@ -70,6 +70,7 @@ const chatSlice = createSlice({
         (conversation) => conversation.id === payload!
       )!;
     },
+
     deleteConversation: (state, { payload }: PayloadAction<string>) => {
       const filteredConversations = state.conversations?.filter(
         (conversation) => conversation?.id !== payload
@@ -100,13 +101,6 @@ const chatSlice = createSlice({
         state.selectedConversation = updatedConversation;
       }
     },
-    updateConversationId: (state, { payload }: PayloadAction<string>) => {
-      if (state.selectedConversation) {
-        state.selectedConversation.id = payload;
-        console.log("con id", state.selectedConversation?.id);
-        console.log("payload", payload);
-      }
-    },
   },
 });
 
@@ -118,7 +112,6 @@ export const {
   createConversation,
   getConversation,
   deleteConversation,
-  updateConversationId,
   addMessageToConversation,
 } = chatSlice.actions;
 

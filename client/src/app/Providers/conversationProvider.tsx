@@ -58,8 +58,11 @@ export default function ConversationProvider({
     try {
       setIsDeleting(true);
 
-      if (conversationId)
+      if (conversationId) {
         await dispatch(deleteConversationThunk(conversationId));
+        const firstConversation = conversations[0];
+        if (firstConversation) dispatch(getConversation(firstConversation?.id));
+      }
 
       setIsDeleting(false);
       setIsDeleteModalOpen(false);

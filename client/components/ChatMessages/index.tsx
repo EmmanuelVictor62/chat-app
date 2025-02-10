@@ -38,8 +38,8 @@ const ChatMessages: React.FC = () => {
         conversationId,
       };
 
-      dispatch(addMessageToConversation(messagePayload));
       await createMessageService(messagePayload);
+      dispatch(addMessageToConversation(messagePayload));
       setIsBotTyping(true);
 
       setTimeout(() => {
@@ -53,7 +53,7 @@ const ChatMessages: React.FC = () => {
 
   useEffect(() => {
     if (scrollerRef.current) {
-      scrollerRef.current.scrollIntoView({ behavior: "smooth" });
+      scrollerRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
     }
   }, [selectedConversation, isBotTyping]);
 
@@ -65,7 +65,7 @@ const ChatMessages: React.FC = () => {
       </div>
 
       {!isLoadingConversations ? (
-        <div className="flex flex-1 flex-col gap-3 pt-5 pb-3 px-5 overflow-auto h-full">
+        <div className="flex flex-1 flex-col gap-3 pt-5 pb-3 px-5 overflow-auto h-full custom-scrollbar">
           <p className="self-center text-sm text-color-dark-1">
             {formattedDateTime(selectedConversation?.createdAt) ?? "N/A"}
           </p>
