@@ -10,10 +10,10 @@ const router = Router();
 
 router.get("/conversations", listAllConversations);
 
-router.post("/conversation", createConversation);
+router.post("/conversations", createConversation);
 
-router.delete("/conversation/:id", deleteConversation);
+router.delete("/conversations/:id", deleteConversation);
 
-router.post("/messages", createMessage);
+router.post("/conversations/:id/messages", createMessage);
 
 export default router;

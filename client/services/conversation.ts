@@ -21,7 +21,7 @@ export const createConversationService = async (message: string) => {
   try {
     const url = `${process.env.NEXT_PUBLIC_CHAT_API_URL}/api/conversations`;
 
-    const { data } = (await axios.post(url, { params: message })) as {
+    const { data } = (await axios.post(url, { message })) as {
       data: Conversation;
     };
 
@@ -49,7 +49,7 @@ export const createMessageService = async (
   createMessagePayload: CreateMessageInput
 ) => {
   try {
-    const url = `${process.env.NEXT_PUBLIC_CHAT_API_URL}/api/messages`;
+    const url = `${process.env.NEXT_PUBLIC_CHAT_API_URL}/api/conversations/${createMessagePayload?.conversationId}/messages`;
 
     const { data } = (await axios.post(url, {
       params: createMessagePayload,

@@ -2,6 +2,7 @@ import ChatMessages from "@/components/ChatMessages";
 import Sidebar from "@/components/Sidebar";
 import RootProvider from "./Providers";
 import ConversationProvider from "./Providers/conversationProvider";
+import DeleteModal from "@/components/DeleteModal";
 
 export default function Home() {
   return (
@@ -13,10 +14,11 @@ export default function Home() {
               CHATBOT
             </div>
           </div>
-          <div className="grid grid-cols-[350px_1fr] gap-6 p-8 bg-[#FEF7FF] h-full flex-1">
+          <div className="grid grid-cols-[350px_1fr] gap-6 p-8 bg-[#FEF7FF] h-full flex-1 overflow-hidden">
             <Sidebar />
             <ChatMessages />
           </div>
+          <DeleteModal />
         </div>
       </ConversationProvider>
     </RootProvider>

@@ -1,23 +1,50 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import ChatInput from "../ChatInput";
 
 import { chatSlice } from "@/state_manager/selectors";
 import { formattedDateTime } from "@/utils/helpers";
-import { MessageSenderEnum } from "@/types/conversation";
+import { CreateMessageInput, MessageSenderEnum } from "@/types/conversation";
+import { createMessageThunk } from "@/thunks/conversation";
+import { Dispatch } from "redux";
+import { addMessageToConversation } from "@/slices/chats";
 
 const ChatMessages: React.FC = () => {
   const { selectedConversation } = useSelector(chatSlice);
+  const dispatch = useDispatch<Dispatch<any>>();
 
-  const handleSendMessage = (message: string) => {
-    console.log(message);
+  const handleSendMessage = async (message: string) => {
+    try {
+      const messagePayload: CreateMessageInput = {
+        text: message,
+        sender: MessageSenderEnum.USER,
+        conversationId: selectedConversation?.id,
+      };
+
+      if (selectedConversation?.messages?.length <= 1) {
+        // await createConversationService(message);
+        dispatch(addMessageToConversation(messagePayload));
+        // dispatch(getConversation(messagePayload?.conversationId));
+      } else {
+        dispatch(createMessageThunk(messagePayload));
+      }
+
+      setTimeout(() => {
+        const botReply: CreateMessageInput = {
+          text: "This is an AI generated message",
+          sender: MessageSenderEnum.BOT,
+          conversationId: messagePayload.conversationId,
+        };
+        dispatch(addMessageToConversation(botReply));
+      }, 120000);
+    } catch {}
   };
 
   return (
-    <div className="flex flex-1 flex-col rounded-[28px] bg-white">
+    <div className="flex flex-1 flex-col rounded-[28px] bg-white overflow-hidden">
       <div className="flex items-center gap-3 justify-start border-b border-gray-200 py-2 px-5">
         <Image src={"/images/avatar.png"} height={48} width={48} alt="avatar" />
         <p className="text-[#1D1B20]">Chatbot</p>

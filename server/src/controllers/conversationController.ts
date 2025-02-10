@@ -20,14 +20,17 @@ export const createConversation = async (req: Request, res: Response) => {
 
     const data = [
       {
+        id: `MSG-${uuidv4()}`,
         sender: "BOT",
         text: "Hi, how can I help you?",
       },
       {
+        id: `MSG-${uuidv4()}`,
         sender: "USER",
         text: message,
       },
       {
+        id: `MSG-${uuidv4()}`,
         sender: "BOT",
         text: "This is an AI generated message",
       },

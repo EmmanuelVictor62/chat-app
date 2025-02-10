@@ -3,7 +3,6 @@ import {
   CreateMessageInput,
   MessageSenderEnum,
 } from "@/types/conversation";
-import { getRandomConversationId } from "@/utils/helpers";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface ChatStateProps {
@@ -81,11 +80,15 @@ const chatSlice = createSlice({
         (con) => con?.id === payload?.conversationId
       );
 
-      if (conversationIndex !== -1) {
-        state.conversations[conversationIndex].messages = [
-          ...state.conversations[conversationIndex].messages,
-          payload,
-        ];
+      const updatedConversation = {
+        ...state.conversations[conversationIndex],
+        messages: [...state.conversations[conversationIndex].messages, payload],
+      };
+
+      state.conversations[conversationIndex] = updatedConversation;
+
+      if (state.selectedConversation?.id === payload.conversationId) {
+        state.selectedConversation = updatedConversation;
       }
     },
   },
