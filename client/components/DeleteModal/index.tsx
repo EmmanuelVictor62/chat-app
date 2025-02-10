@@ -25,8 +25,8 @@ const DeleteModal: React.FC = ({}) => {
       ref={overlayRef}
       className="bg-modal-background flex items-center justify-center fixed top-0 left-0 right-0 bottom-0 z-auto backdrop-blur-[10px]"
     >
-      <div className="bg-white flex flex-col gap-6 items-center py-6 px-8 rounded-3xl w-[400px] ">
-        <p className="text-[22px] text-color-dark-1 text-center">
+      <div className="bg-white flex flex-col gap-6 items-center py-6 px-6 rounded-3xl w-[400px] md:px-8">
+        <p className="text-[18px] text-color-dark-1 text-center md:text-[22px]">
           Are you sure you want to delete {conversationName}?
         </p>
         <div className="flex justify-between w-full gap-4">

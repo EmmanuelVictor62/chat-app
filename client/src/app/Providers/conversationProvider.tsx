@@ -58,7 +58,6 @@ export default function ConversationProvider({
   };
 
   const handleToggleSidebar = () => {
-    console.log("called");
     setToggleSidebar(!toggleSidebar);
   };
 
