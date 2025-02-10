@@ -142,7 +142,10 @@ const ChatMessages: React.FC = () => {
       )}
 
       <div className="py-3 px-5 md:px-6">
-        <ChatInput handleSendMessage={handleSendMessage} />
+        <ChatInput
+          disabled={isBotTyping}
+          handleSendMessage={handleSendMessage}
+        />
       </div>
     </div>
   );

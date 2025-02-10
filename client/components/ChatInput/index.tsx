@@ -8,10 +8,14 @@ type FormValues = {
 };
 
 interface ChatInputProps {
+  disabled: boolean;
   handleSendMessage: (message: string) => void;
 }
 
-const ChatInput: React.FC<ChatInputProps> = ({ handleSendMessage }) => {
+const ChatInput: React.FC<ChatInputProps> = ({
+  disabled,
+  handleSendMessage,
+}) => {
   const {
     register,
     handleSubmit,
@@ -36,6 +40,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ handleSendMessage }) => {
         {...register("message")}
         type="text"
         autoFocus
+        disabled={disabled}
         placeholder="Reply to Chatbot..."
         className="flex-1 bg-transparent border-none outline-none text-sm text-[#171a1f] "
       />
