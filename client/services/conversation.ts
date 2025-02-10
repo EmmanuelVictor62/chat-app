@@ -58,6 +58,7 @@ export const createMessageService = async (
 
     return { data };
   } catch (error) {
+    console.error(error);
     throw error;
   }
 };
