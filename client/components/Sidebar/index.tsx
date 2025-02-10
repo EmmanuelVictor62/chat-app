@@ -7,23 +7,32 @@ import Icon from "../Icon";
 import { useConversation } from "@/src/app/Providers/conversationProvider";
 
 import { chatSlice } from "@/state_manager/selectors";
-import { getRandomConversationId } from "@/utils/helpers";
 import { createConversation, getConversation } from "@/slices/chats";
+import { createConversationService } from "@/services/conversation";
 
 const Sidebar: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dispatch = useDispatch<Dispatch<any>>();
-  const { conversations, selectedConversation, isLoadingConversations } =
-    useSelector(chatSlice);
+  const {
+    conversations,
+    selectedConversation,
+    isLoadingConversations,
+    loading,
+  } = useSelector(chatSlice);
   const { handleOpenDeleteModal } = useConversation();
 
   const handleGetConversation = (conversationId: string) => {
     dispatch(getConversation(conversationId));
   };
 
-  const handleAddConversation = () => {
-    const conversationId = getRandomConversationId();
-    dispatch(createConversation(conversationId));
+  const handleAddConversation = async () => {
+    try {
+      const { data } = await createConversationService();
+
+      if (data) dispatch(createConversation(null!));
+    } catch (error) {
+      throw error;
+    }
   };
 
   return (
@@ -32,7 +41,11 @@ const Sidebar: React.FC = () => {
         className="flex items-center justify-center gap-3  bg-purple-1 rounded-2xl bg-c shadow-custom-3 py-4 px-5 text-sm text-[#21005D]"
         onClick={handleAddConversation}
       >
-        <Icon icon="plusIcon" />
+        {loading ? (
+          <Icon icon="loading" className="delete-button" />
+        ) : (
+          <Icon icon="plusIcon" />
+        )}
         Conversations
       </button>
       {!isLoadingConversations ? (

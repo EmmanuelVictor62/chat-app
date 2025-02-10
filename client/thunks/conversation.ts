@@ -9,6 +9,7 @@ import {
   apiCallFailed,
   deleteConversation,
   initialApiCall,
+  initialConversationApiCall,
   listAllConversations,
 } from "@/slices/chats";
 import { CreateMessageInput } from "@/types/conversation";
@@ -16,6 +17,7 @@ import { CreateMessageInput } from "@/types/conversation";
 export const listAllConversationsThunk = (): AppThunk => async (dispatch) => {
   try {
     dispatch(initialApiCall());
+    dispatch(initialConversationApiCall());
 
     const { data } = await listAllConversationsService();
 

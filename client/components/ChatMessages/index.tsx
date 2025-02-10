@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Dispatch } from "redux";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,40 +10,52 @@ import Icon from "../Icon";
 import { chatSlice } from "@/state_manager/selectors";
 import { formattedDateTime } from "@/utils/helpers";
 import { CreateMessageInput, MessageSenderEnum } from "@/types/conversation";
-import { createMessageThunk } from "@/thunks/conversation";
 import { addMessageToConversation } from "@/slices/chats";
+import { createMessageService } from "@/services/conversation";
 
 const ChatMessages: React.FC = () => {
+  const [isBotTyping, setIsBotTyping] = useState<boolean>(false);
+
   const { selectedConversation, isLoadingConversations } =
     useSelector(chatSlice);
   const dispatch = useDispatch<Dispatch<any>>();
 
+  const scrollerRef = useRef<HTMLDivElement>(null!);
+
   const handleSendMessage = async (message: string) => {
     try {
+      const conversationId = selectedConversation?.id;
+
       const messagePayload: CreateMessageInput = {
         text: message,
         sender: MessageSenderEnum.USER,
-        conversationId: selectedConversation?.id,
+        conversationId,
       };
 
-      if (selectedConversation?.messages?.length <= 1) {
-        // await createConversationService(message);
-        dispatch(addMessageToConversation(messagePayload));
-        // dispatch(getConversation(messagePayload?.conversationId));
-      } else {
-        dispatch(createMessageThunk(messagePayload));
-      }
+      const botMessagePayload: CreateMessageInput = {
+        text: "This is an AI generated message",
+        sender: MessageSenderEnum.BOT,
+        conversationId,
+      };
+
+      dispatch(addMessageToConversation(messagePayload));
+      await createMessageService(messagePayload);
+      setIsBotTyping(true);
 
       setTimeout(() => {
-        const botReply: CreateMessageInput = {
-          text: "This is an AI generated message",
-          sender: MessageSenderEnum.BOT,
-          conversationId: messagePayload.conversationId,
-        };
-        dispatch(addMessageToConversation(botReply));
-      }, 120000);
-    } catch {}
+        setIsBotTyping(false);
+        dispatch(addMessageToConversation(botMessagePayload));
+      }, 2000);
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
   };
+
+  useEffect(() => {
+    if (scrollerRef.current) {
+      scrollerRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [selectedConversation, isBotTyping]);
 
   return (
     <div className="flex flex-1 flex-col rounded-[28px] bg-white overflow-hidden">
@@ -91,6 +103,22 @@ const ChatMessages: React.FC = () => {
               </React.Fragment>
             );
           })}
+
+          {isBotTyping && (
+            <div className="flex items-center gap-2 py-[10px] justify-start">
+              <Image
+                src={"/images/avatar.png"}
+                height={48}
+                width={48}
+                alt="avatar"
+              />
+              <div className="py-2 px-4 rounded-tl-[20px] rounded-tr-[20px] rounded-br-[20px] rounded-bl-[8px] bg-[#ECE6F0] ">
+                <Icon icon="typing" />
+              </div>
+            </div>
+          )}
+
+          <div ref={scrollerRef}></div>
         </div>
       ) : (
         <div className="flex items-center justify-center h-full">

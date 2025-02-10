@@ -16,23 +16,11 @@ export const listAllConversations = async (req: Request, res: Response) => {
 
 export const createConversation = async (req: Request, res: Response) => {
   try {
-    const { message } = req.body;
-
     const data = [
       {
         id: `MSG-${uuidv4()}`,
         sender: "BOT",
         text: "Hi, how can I help you?",
-      },
-      {
-        id: `MSG-${uuidv4()}`,
-        sender: "USER",
-        text: message,
-      },
-      {
-        id: `MSG-${uuidv4()}`,
-        sender: "BOT",
-        text: "This is an AI generated message",
       },
     ];
 
@@ -68,11 +56,30 @@ export const createMessage = async (req: Request, res: Response) => {
   try {
     const { text, sender, conversationId } = req.body;
 
-    const message = await prisma.message.create({
-      data: { id: `MSG-${uuidv4()}`, text, sender, conversationId },
-    });
+    const messages = [
+      {
+        id: `MSG-${uuidv4()}`,
+        text,
+        sender,
+        conversationId,
+      },
+      {
+        id: `MSG-${uuidv4()}`,
+        text: "This is an AI generated response",
+        sender: "BOT",
+        conversationId,
+      },
+    ];
 
-    res.status(200).json(message);
+    const createdMessages = await prisma.$transaction(
+      messages.map((message) =>
+        prisma.message.create({
+          data: message,
+        })
+      )
+    );
+
+    res.status(200).json(createdMessages);
   } catch (error: any) {
     res.status(500).json({ message: error?.message });
   }

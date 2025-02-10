@@ -52,9 +52,9 @@ export const icons: Record<IconNames, string> = {
   typing: `<svg
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 120 30"
-  fill="#b0c4d7"
-  width="120"
-  height="30"
+  fill="#21005D"
+  width="35"
+  height="24"
 >
   <circle cx="15" cy="15" r="12">
     <animate

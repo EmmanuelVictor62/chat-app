@@ -58,7 +58,8 @@ export default function ConversationProvider({
     try {
       setIsDeleting(true);
 
-      await dispatch(deleteConversationThunk(conversationId));
+      if (conversationId)
+        await dispatch(deleteConversationThunk(conversationId));
 
       setIsDeleting(false);
       setIsDeleteModalOpen(false);

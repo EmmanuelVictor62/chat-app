@@ -17,11 +17,11 @@ export const listAllConversationsService = async () => {
   }
 };
 
-export const createConversationService = async (message: string) => {
+export const createConversationService = async () => {
   try {
     const url = `${process.env.NEXT_PUBLIC_CHAT_API_URL}/api/conversations`;
 
-    const { data } = (await axios.post(url, { message })) as {
+    const { data } = (await axios.post(url)) as {
       data: Conversation;
     };
 
@@ -52,9 +52,9 @@ export const createMessageService = async (
   try {
     const url = `${process.env.NEXT_PUBLIC_CHAT_API_URL}/api/conversations/${createMessagePayload?.conversationId}/messages`;
 
-    const { data } = (await axios.post(url, {
-      params: createMessagePayload,
-    })) as { data: Message };
+    const { data } = (await axios.post(url, createMessagePayload)) as {
+      data: Message;
+    };
 
     return { data };
   } catch (error) {

@@ -3,7 +3,7 @@ import {
   CreateMessageInput,
   MessageSenderEnum,
 } from "@/types/conversation";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, current } from "@reduxjs/toolkit";
 
 interface ChatStateProps {
   loading: boolean;
@@ -27,6 +27,9 @@ const chatSlice = createSlice({
   reducers: {
     initialApiCall: (state) => {
       state.loading = true;
+      state.error = false;
+    },
+    initialConversationApiCall: (state) => {
       state.isLoadingConversations = true;
       state.error = false;
     },
@@ -56,7 +59,7 @@ const chatSlice = createSlice({
         ],
       };
 
-      state.conversations.push(newConversation);
+      state.conversations = [...state.conversations, newConversation];
       state.selectedConversation = newConversation;
 
       state.loading = false;
@@ -80,7 +83,9 @@ const chatSlice = createSlice({
       state,
       { payload }: PayloadAction<CreateMessageInput>
     ) => {
-      const conversationIndex = state.conversations?.findIndex(
+      const conversations = current(state.conversations);
+
+      const conversationIndex = conversations?.findIndex(
         (con) => con?.id === payload?.conversationId
       );
 
@@ -95,16 +100,25 @@ const chatSlice = createSlice({
         state.selectedConversation = updatedConversation;
       }
     },
+    updateConversationId: (state, { payload }: PayloadAction<string>) => {
+      if (state.selectedConversation) {
+        state.selectedConversation.id = payload;
+        console.log("con id", state.selectedConversation?.id);
+        console.log("payload", payload);
+      }
+    },
   },
 });
 
 export const {
   initialApiCall,
+  initialConversationApiCall,
   apiCallFailed,
   listAllConversations,
   createConversation,
   getConversation,
   deleteConversation,
+  updateConversationId,
   addMessageToConversation,
 } = chatSlice.actions;
 
