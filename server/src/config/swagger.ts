@@ -15,7 +15,7 @@ const options = {
       },
     ],
   },
-  apis: ["../routes/conversationRoutes.ts"],
+  apis: ["src/controllers/conversationController.ts"],
 };
 
 const specs = swaggerJsdoc(options);
