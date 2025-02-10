@@ -12,7 +12,12 @@ interface ChatInputProps {
 }
 
 const ChatInput: React.FC<ChatInputProps> = ({ handleSendMessage }) => {
-  const { register, handleSubmit, reset } = useForm<FormValues>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { touchedFields },
+  } = useForm<FormValues>();
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     if (!data.message.trim()) return;
@@ -23,13 +28,16 @@ const ChatInput: React.FC<ChatInputProps> = ({ handleSendMessage }) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex items-center justify-between gap-2 bg-color-light-blue-1  rounded-full px-5 py-4"
+      className={`flex items-center justify-between gap-2 bg-color-light-blue-1  rounded-full px-5 py-4  ${
+        touchedFields.message ? "border-color-dark-3 border" : ""
+      }  `}
     >
       <input
         {...register("message")}
         type="text"
+        autoFocus
         placeholder="Reply to Chatbot..."
-        className="flex-1 bg-transparent border-none outline-none text-sm text-[#171a1f]"
+        className="flex-1 bg-transparent border-none outline-none text-sm text-[#171a1f] "
       />
 
       <button type="submit">

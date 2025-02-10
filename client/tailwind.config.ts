@@ -13,6 +13,7 @@ export default {
         "purple-2": "#65558F",
         "color-dark-1": "#1D1B20",
         "color-dark-2": "#49454F",
+        "color-dark-3": "#79747E",
         "color-light-blue-1": "#ECE6F0",
         "color-light-blue-2": "#E8DEF8",
         "color-light-blue-3": "rgba(29, 27, 32, 0.12)",
