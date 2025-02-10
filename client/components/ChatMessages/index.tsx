@@ -12,14 +12,16 @@ import { formattedDateTime } from "@/utils/helpers";
 import { CreateMessageInput, MessageSenderEnum } from "@/types/conversation";
 import { addMessageToConversation } from "@/slices/chats";
 import { createMessageService } from "@/services/conversation";
+import { useConversation } from "@/src/app/Providers/conversationProvider";
 
 const ChatMessages: React.FC = () => {
   const [isBotTyping, setIsBotTyping] = useState<boolean>(false);
 
   const { selectedConversation, isLoadingConversations } =
     useSelector(chatSlice);
-  const dispatch = useDispatch<Dispatch<any>>();
+  const { handleToggleSidebar } = useConversation();
 
+  const dispatch = useDispatch<Dispatch<any>>();
   const scrollerRef = useRef<HTMLDivElement>(null!);
 
   const handleSendMessage = async (message: string) => {
@@ -58,10 +60,23 @@ const ChatMessages: React.FC = () => {
   }, [selectedConversation, isBotTyping]);
 
   return (
-    <div className="flex flex-1 flex-col rounded-[28px] bg-white overflow-hidden">
-      <div className="flex items-center gap-3 justify-start border-b border-gray-200 py-2 px-5">
-        <Image src={"/images/avatar.png"} height={48} width={48} alt="avatar" />
-        <p className="text-[#1D1B20]">Chatbot</p>
+    <div className="flex flex-1 flex-col overflow-hidden md:bg-white md:rounded-[28px]">
+      <div className="flex items-center gap-3 justify-between border-y border-color-grey-1 py-2 px-4 md:m-0 mt-[29px] md:border-gray-200 md:border-b md:px-5 md:border-y-0">
+        <div className="flex items-center gap-3 justify-start">
+          <Image
+            src={"/images/avatar.png"}
+            height={48}
+            width={48}
+            alt="avatar"
+          />
+          <p className="text-[#1D1B20]">Chatbot</p>
+        </div>
+        <button
+          onClick={handleToggleSidebar}
+          className="flex items-center md:hidden"
+        >
+          <Icon icon="nav" />
+        </button>
       </div>
 
       {!isLoadingConversations ? (
@@ -126,7 +141,7 @@ const ChatMessages: React.FC = () => {
         </div>
       )}
 
-      <div className="py-3 px-6">
+      <div className="py-3 px-5 md:px-6">
         <ChatInput handleSendMessage={handleSendMessage} />
       </div>
     </div>

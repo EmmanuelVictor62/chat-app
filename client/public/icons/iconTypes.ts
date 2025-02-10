@@ -3,4 +3,5 @@ export type IconNames =
   | "bin"
   | "paperPlane"
   | "loading"
-  | "typing";
+  | "typing"
+  | "nav";

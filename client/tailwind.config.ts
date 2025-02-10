@@ -10,10 +10,14 @@ export default {
     extend: {
       colors: {
         "purple-1": "#EADDFF",
+        "purple-2": "#65558F",
         "color-dark-1": "#1D1B20",
         "color-dark-2": "#49454F",
         "color-light-blue-1": "#ECE6F0",
         "color-light-blue-2": "#E8DEF8",
+        "color-light-blue-3": "rgba(29, 27, 32, 0.12)",
+        "color-grey-1": "#CAC4D0",
+        "color-grey-2": "#FEF7FF",
         "color-red-1": "#B3261E",
         "modal-background": "rgba(24, 19, 43, 0.21)",
       },

@@ -11,6 +11,7 @@ import { chatSlice } from "@/state_manager/selectors";
 import { getConversation } from "@/slices/chats";
 
 const ConversationContext = createContext<{
+  toggleSidebar: boolean;
   isDeleting: boolean;
   isDeleteModalOpen: boolean;
   conversationName: string;
@@ -18,6 +19,7 @@ const ConversationContext = createContext<{
   handleCloseDeleteModal: () => void;
   handleOpenDeleteModal: (name: string, id: string) => void;
   handleDeleteConversation: () => void;
+  handleToggleSidebar: () => void;
 } | null>(null);
 
 export default function ConversationProvider({
@@ -28,6 +30,7 @@ export default function ConversationProvider({
   const dispatch = useDispatch<Dispatch<any>>();
   const { conversations } = useSelector(chatSlice);
 
+  const [toggleSidebar, setToggleSidebar] = useState<boolean>(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const [conversationName, setConversationName] = useState<string>("");
   const [conversationId, setConversationId] = useState<string>("");
@@ -54,6 +57,11 @@ export default function ConversationProvider({
     setConversationName("");
   };
 
+  const handleToggleSidebar = () => {
+    console.log("called");
+    setToggleSidebar(!toggleSidebar);
+  };
+
   const handleDeleteConversation = async () => {
     try {
       setIsDeleting(true);
@@ -74,6 +82,7 @@ export default function ConversationProvider({
   return (
     <ConversationContext.Provider
       value={{
+        toggleSidebar,
         isDeleting,
         isDeleteModalOpen,
         handleCloseDeleteModal,
@@ -81,6 +90,7 @@ export default function ConversationProvider({
         conversationName,
         conversationId,
         handleDeleteConversation,
+        handleToggleSidebar,
       }}
     >
       {children}
