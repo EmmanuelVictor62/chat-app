@@ -72,7 +72,7 @@ chat-app/
 
 Here’s a short preview of the project in action:
 
-![Chat Demo]('./client/public/chat-app-gif.gif')
+![Chat Demo](chat-app.gif)
 
 > User sends a message → input is disabled → bot "types" a response → realistic feedback cycle
 
