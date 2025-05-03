@@ -115,4 +115,7 @@ All API requests are validated using Zod. If the request does not meet the schem
 
 ---
 
+![Chat App Preview](./client/public/preview.gif)
+
+
 **Made with ❤️ by Emmanuel Victor**
