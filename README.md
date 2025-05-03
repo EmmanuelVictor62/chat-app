@@ -1,5 +1,3 @@
-Here's the properly ordered and formatted `README.md`:
-
 ```md
 # Chat Application
 
