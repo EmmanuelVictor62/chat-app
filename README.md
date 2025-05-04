@@ -1,3 +1,4 @@
+![Chat App Preview](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDhjc3IwOHdyeXJ6M296OWl4dHF6aHh3ZGszOTNwbXF3YTV4Ym81ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Efgc9POZkrjh6APel0/giphy.gif)
 ```md
 # Chat Application
 
@@ -114,8 +115,6 @@ All API requests are validated using Zod. If the request does not meet the schem
 5. Open a Pull Request
 
 ---
-
-![Chat App Preview](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDhjc3IwOHdyeXJ6M296OWl4dHF6aHh3ZGszOTNwbXF3YTV4Ym81ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Efgc9POZkrjh6APel0/giphy.gif)
 
 
 **Made with ❤️ by Emmanuel Victor**
